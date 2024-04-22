@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import { ChakraProvider, Container, Box, Button } from "@chakra-ui/react";
 import { Theme } from "./components/Theme";
-import { WebApp } from "@grammyjs/web-app";
+
+const WebApp = window.Telegram.WebApp;
 
 function App() {
   const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
@@ -298,7 +299,7 @@ function App() {
     if (WebApp) {
       WebApp.ready();
     }
-  }, []);
+  });
 
   const handleCheckboxChange = (subject) => {
     setSelectedCheckboxes((prevSelectedCheckboxes) => {
@@ -310,9 +311,16 @@ function App() {
     });
   };
 
+  const handleSubjectsSubmit = () => {
+    WebApp.Mainbutton.text = "Зберегти";
+    WebApp.Mainbutton.show();
+    WebApp.close;
+  };
+
   return (
     <ChakraProvider>
       <Container>
+        <Box mb={12}>Виконавець: {WebApp.initDataUnsafe?.user?.username}</Box>
         <Box>
           <form onSubmit={handleSubmit}>
             {themes.map((theme) => (
@@ -325,7 +333,12 @@ function App() {
               />
             ))}
 
-            <Button type="submit" mt={10} colorScheme="green">
+            <Button
+              type="submit"
+              onClick={handleSubjectsSubmit}
+              mt={10}
+              colorScheme="green"
+            >
               Зберегти
             </Button>
           </form>
