@@ -12,8 +12,8 @@ function App() {
     const selectedLabels = themes.flatMap((theme) =>
       theme.subjects.filter((subject) => selectedCheckboxes.includes(subject))
     );
-    console.log(selectedLabels);
-    console.log(WebApp);
+    console.log(`${selectedLabels}`);
+    console.log(`${WebApp}`);
   };
 
   const themes = [
@@ -330,9 +330,7 @@ function App() {
             </Button>
           </form>
         </Box>
-        <Box>{WebApp.value?.WebApp.initDataUnsafe.user}</Box>
-        <Box>{selectedLabels}</Box>
-        <Box>{WebApp}</Box>
+        {/* <Box>{`${WebApp.value?.WebApp.initDataUnsafe.user}`}</Box> */}
       </Container>
     </ChakraProvider>
   );
