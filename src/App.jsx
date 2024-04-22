@@ -298,6 +298,8 @@ function App() {
   useEffect(() => {
     if (WebApp) {
       WebApp.ready();
+      WebApp.Mainbutton.text = "Зберегти";
+      WebApp.Mainbutton.show();
     }
   });
 
@@ -312,8 +314,6 @@ function App() {
   };
 
   const handleSubjectsSubmit = () => {
-    WebApp.Mainbutton.text = "Зберегти";
-    WebApp.Mainbutton.show();
     WebApp.close;
   };
 
