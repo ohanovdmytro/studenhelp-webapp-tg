@@ -26,8 +26,6 @@ function App() {
 
   useEffect(() => {
     WebApp.ready();
-    WebApp.MainButton.setText(`Зберегти`);
-    WebApp.MainButton.show();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -42,6 +40,7 @@ function App() {
 
       const response = await fetch(
         `https://square-zinc-farmer.glitch.me/send`,
+        // `http://localhost:3000/send`,
         {
           method: "POST",
           headers: {
@@ -92,7 +91,12 @@ function App() {
               />
             ))}
 
-            <Modal blockScrollOnMount={true} p={6} isOpen={isOpen} onClose={onClose}>
+            <Modal
+              blockScrollOnMount={true}
+              p={6}
+              isOpen={isOpen}
+              onClose={onClose}
+            >
               <ModalOverlay />
               <ModalContent>
                 <ModalHeader>Modal Title</ModalHeader>
