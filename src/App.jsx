@@ -18,7 +18,7 @@ function App() {
     e.preventDefault();
 
     try {
-      const name = WebApp.initDataUnsafe?.user?.first_name || "";
+      const name = WebApp.initData?.user?.first_name || "";
       const requestBody = {
         name: name,
         subject: selectedSubjects,
