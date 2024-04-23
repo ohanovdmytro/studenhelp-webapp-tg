@@ -5,7 +5,7 @@ export const Theme = ({
   name,
   subjects,
   onCheckboxChange,
-  selectedCheckboxes,
+  selectedSubjects,
 }) => {
   return (
     <Box>
@@ -19,7 +19,7 @@ export const Theme = ({
             colorScheme="green"
             fontSize="xs"
             textAlign="left"
-            isChecked={selectedCheckboxes.includes(label)}
+            isChecked={selectedSubjects.includes(label)}
             onChange={() => onCheckboxChange(label)}
           >
             {label}
