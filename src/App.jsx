@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import { ChakraProvider, Container, Box, Button } from "@chakra-ui/react";
 import { Theme } from "./components/Theme";
-import { themes } from "./utils/themes";
+import { themes } from "../src/utils/themes.js";
 
 const WebApp = window.Telegram.WebApp;
 
