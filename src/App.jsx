@@ -14,7 +14,6 @@ function App() {
       theme.subjects.filter((subject) => selectedCheckboxes.includes(subject))
     );
     console.log(`${selectedLabels}`);
-    console.log(`${WebApp}`);
   };
 
   const themes = [
@@ -298,8 +297,8 @@ function App() {
   useEffect(() => {
     if (WebApp) {
       WebApp.ready();
-      WebApp.Mainbutton.text = "Зберегти";
-      WebApp.Mainbutton.show();
+      // WebApp.Mainbutton.text = "Зберегти";
+      // WebApp.Mainbutton.show();
     }
   });
 
@@ -343,7 +342,6 @@ function App() {
             </Button>
           </form>
         </Box>
-        {/* <Box>{`${WebApp.value?.WebApp.initDataUnsafe.user}`}</Box> */}
       </Container>
     </ChakraProvider>
   );
