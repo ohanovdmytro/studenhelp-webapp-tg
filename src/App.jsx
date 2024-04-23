@@ -1,24 +1,40 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { ChakraProvider, Container, Box, Button } from "@chakra-ui/react";
+import {
+  ChakraProvider,
+  useDisclosure,
+  Container,
+  Box,
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  Text,
+  ModalFooter,
+  ModalCloseButton,
+  ModalBody,
+  ModalHeader,
+} from "@chakra-ui/react";
 import { Theme } from "./components/Theme";
 import { themes } from "../src/utils/themes.js";
 
 const WebApp = window.Telegram.WebApp;
 
 function App() {
-  const endpointUrl = import.meta.ENDPOINT_URL;
   const [selectedSubjects, setSelectedSubjects] = useState([]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     WebApp.ready();
+    WebApp.MainButton.setText(`Зберегти`);
+    WebApp.MainButton.show();
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const name = WebApp.initData?.user?.first_name || "";
+      const name = WebApp.WebAppUser?.first_name || "";
       const requestBody = {
         name: name,
         subject: selectedSubjects,
@@ -55,7 +71,8 @@ function App() {
     });
   };
 
-  const handleSubjectsSubmit = () => {
+  const handleExitWebApp = (e) => {
+    e.preventDefault();
     WebApp.close();
   };
 
@@ -75,12 +92,26 @@ function App() {
               />
             ))}
 
-            <Button
-              type="submit"
-              onClick={handleSubjectsSubmit}
-              mt={10}
-              colorScheme="green"
-            >
+            <Modal blockScrollOnMount={true} p={6} isOpen={isOpen} onClose={onClose}>
+              <ModalOverlay />
+              <ModalContent>
+                <ModalHeader>Modal Title</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                  <Text fontWeight="bold" mb="1rem">
+                    Фільтри встановлено!
+                  </Text>
+                </ModalBody>
+
+                <ModalFooter>
+                  <Button colorScheme="blue" mr={3} onClick={handleExitWebApp}>
+                    Закрити
+                  </Button>
+                </ModalFooter>
+              </ModalContent>
+            </Modal>
+
+            <Button type="submit" onClick={onOpen} mt={10} colorScheme="green">
               Зберегти
             </Button>
           </form>
