@@ -32,21 +32,15 @@ function App() {
     e.preventDefault();
 
     try {
-      const name = WebApp.WebAppUser?.first_name || "";
-      const requestBody = {
-        name: name,
-        subject: selectedSubjects,
-      };
-
       const response = await fetch(
-        `https://square-zinc-farmer.glitch.me/send`,
-        // `http://localhost:3000/send`,
+        // `https://square-zinc-farmer.glitch.me/send`,
+        `http://localhost:3000/uploadSubjects`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(requestBody),
+          body: JSON.stringify({ subject: selectedSubjects }),
         }
       );
 
@@ -54,9 +48,11 @@ function App() {
         throw new Error("Failed to send data to Google Sheets");
       }
 
+      const responseData = await response.json();
+
       await WebApp.sendData(
         JSON.stringify({
-          filledSubjects: true,
+          newName: responseData.name,
         })
       );
 
@@ -84,7 +80,9 @@ function App() {
   return (
     <ChakraProvider>
       <Container>
-        <Box mb={12}>Виконавець: {WebApp.WebAppUser?.first_name}</Box>
+        <Box mb={12}>
+          <Text fontWeight="bold">Оберіть предмети:</Text>
+        </Box>
         <Box>
           <form onSubmit={handleSubmit}>
             {themes.map((theme) => (
@@ -105,11 +103,11 @@ function App() {
             >
               <ModalOverlay />
               <ModalContent>
-                <ModalHeader>Modal Title</ModalHeader>
+                <ModalHeader>Фільтри встановлено</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                   <Text fontWeight="bold" mb="1rem">
-                    Фільтри встановлено!
+                    Дякуємо, що обрали предмети.
                   </Text>
                 </ModalBody>
 
