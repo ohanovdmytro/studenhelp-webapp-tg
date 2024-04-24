@@ -59,12 +59,10 @@ function App() {
       //   subjects: selectedSubjects,
       // };
 
-      await WebApp.sendData(
-        JSON.stringify({
-          username: WebApp.initDataUnsafe?.user?.username,
-          subjects: selectedSubjects,
-        })
-      );
+      await WebApp.sendData({
+        username: WebApp.initDataUnsafe?.user?.username,
+        subjects: selectedSubjects,
+      });
 
       console.log("Data sent to Google Sheets and Telegram successfully");
     } catch (error) {
