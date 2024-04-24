@@ -32,7 +32,7 @@ function App() {
     e.preventDefault();
 
     try {
-      const name = WebApp.initDataUnsafe?.user?.first_name || "";
+      const name = WebApp.WebAppUser?.first_name || "";
       const requestBody = {
         name: name,
         subject: selectedSubjects,
@@ -84,7 +84,7 @@ function App() {
   return (
     <ChakraProvider>
       <Container>
-        <Box mb={12}>Виконавець: {WebApp.initDataUnsafe?.user?.first_name}</Box>
+        <Box mb={12}>Виконавець: {WebApp.WebAppUser?.first_name}</Box>
         <Box>
           <form onSubmit={handleSubmit}>
             {themes.map((theme) => (
