@@ -48,11 +48,9 @@ function App() {
         throw new Error("Failed to send data to Google Sheets");
       }
 
-      const responseData = await response.json();
-
       await WebApp.sendData(
         JSON.stringify({
-          newName: responseData.name,
+          filledSubjects: true,
         })
       );
 
