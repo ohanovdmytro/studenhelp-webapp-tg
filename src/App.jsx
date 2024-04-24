@@ -33,8 +33,8 @@ function App() {
 
     try {
       const response = await fetch(
-        // `https://square-zinc-farmer.glitch.me/send`,
-        `http://localhost:3000/uploadSubjects`,
+        `https://square-zinc-farmer.glitch.me/uploadSubjects`,
+        // `http://localhost:3000/uploadSubjects`,
         {
           method: "POST",
           headers: {
