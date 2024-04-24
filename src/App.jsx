@@ -54,7 +54,12 @@ function App() {
         throw new Error("Failed to send data to Google Sheets");
       }
 
-      await WebApp.sendData(JSON.stringify({ filledSubjects: true }));
+      const webAppResponse = {
+        name: await WebApp.initDataUnsafe?.user?.first_name,
+        subjects: selectedSubjects,
+      };
+
+      await WebApp.sendData(JSON.stringify(webAppResponse));
 
       console.log("Data sent to Google Sheets and Telegram successfully");
     } catch (error) {
