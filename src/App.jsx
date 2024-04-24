@@ -32,7 +32,7 @@ function App() {
     e.preventDefault();
 
     try {
-      const name = WebApp.WebAppUser?.first_name || "";
+      const name = WebApp.initDataUnsafe?.user?.first_name || "";
       const requestBody = {
         name: name,
         subject: selectedSubjects,
@@ -54,7 +54,9 @@ function App() {
         throw new Error("Failed to send data to Google Sheets");
       }
 
-      console.log("Data sent to Google Sheets successfully");
+      await WebApp.sendData(JSON.stringify({ filledSubjects: true }));
+
+      console.log("Data sent to Google Sheets and Telegram successfully");
     } catch (error) {
       console.error("Error sending data to Google Sheets:", error);
     }
